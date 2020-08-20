@@ -18,12 +18,13 @@
 
 #include "DS2450.h"
 
-DS2450::DS2450(OneWire *ow, uint8_t *address) {
+DS2450::DS2450(OneWire *ow) {
     _ow = ow;
-    _address = address;
+    
 };
 
-boolean DS2450::begin() {
+boolean DS2450::begin(uint8_t *address) {
+    _address = address;
     _ow->reset();
     _ow->select(_address);
     _ow->write(DS2450_WRITE_COMMAND, 0);
@@ -55,7 +56,8 @@ boolean DS2450::begin() {
     return true;
 }
 
-void DS2450::update() {
+void DS2450::update(uint8_t *address) {
+    _address = address;
     uint8_t data[13];
 
     _timestamp = millis();

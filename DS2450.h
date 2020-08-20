@@ -38,12 +38,12 @@
 #define DS2450_AD_CHANNELS_ADDR_LO 0x00
 #define DS2450_AD_CHANNELS_ADDR_HI 0x00
 #define DS2450_TEMP_CONVERSION_TIMEOUT 50
-
+#define DS2450_FAMILY 0x20
 class DS2450 {
     public:
-        DS2450(OneWire *ow, uint8_t *address);
-        boolean begin();
-        void update();
+        DS2450(OneWire *ow);
+        boolean begin(uint8_t *address);
+        void update(uint8_t *address);
         float getVoltage(int channel);
         boolean isError();
         unsigned long getTimestamp();
